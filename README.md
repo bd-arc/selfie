@@ -37,6 +37,8 @@ ScriptCam (paid plugin)
 
 **DESKTOP / All browsers**
 
+https://www.scriptcam.com/demo_1.cfm
+
 https://www.scriptcam.com/download.cfm
 
 
