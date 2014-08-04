@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+
+        <!-- Useful tags for mobile devices - Src: http://expeert.com/fr/ios/blog/1595-balises-meta-pour-le-web-mobile -->
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="format-detection" content="telephone=no" />
+
+
+        <title>Test Media Capture</title>
+
+
+        <!-- STYLESHEETS -->
+        <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Lato:100,300|Oswald:400&subset=latin,latin-ext' />
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+        <link rel="stylesheet" href="css/styles.css" />
+
+
+        <!-- SCRIPTS -->
+        <script src="libs/modernizr/modernizr.custom.js"></script>
+        <script src="libs/fastclick/fastclick.js"></script>
+        <script src="libs/jquery/jquery-2.1.0.min.js"></script>
+
+        <script src="js/jq.application.js"></script>
+        <script src="js/jq.custom.js"></script>
+        <script src="js/jq.initialize.js"></script>
+
+    </head>
+
+    <body>
+
+        <div id="loader">
+            <img class="img-block" src="img/button-shadow-loader.png" />
+            <span class="icon"></span>
+            <p>Traitement...</p>
+        </div>
+        <div id="loader-overlay"></div>
+
+        <div id="mediaCapture" style="display: none;">
+            <h1>Capture d'image<span>via HTML5 Media Capture</span></h1>
+
+            <div class="wrapper-center">
+                <div class="mediaCapture-customInput">
+                    Prendre une photo
+                    <input id="mediaCapture-input" type="file" accept="image/*;capture=camera" /> <!-- capture="camera" -->
+                </div>
+                <img id="mediaCapture-img" class="img-block" src="img/transparent.gif" />
+            </div>
+        </div>
+
+        <div id="scriptCam" style="display: none;">
+            <h1>Capture d'image<span>via ScriptCam</span></h1>
+
+            <div class="wrapper-center">
+                <div class="scriptCam-webcam-wrapper">
+                    <div id="scriptCam-webcam"></div>
+                    <p>Sélectionnez une webcam</p>
+                    <div class="scriptCam-customSelect">
+                        <select id="scriptCam-cameraNames" size="1"></select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wrapper-center">
+                <div class="scriptCam-splitLayout align-right">
+                    <div class="clearfix">
+                        <button id="scriptCam-btn2">Prendre une photo</button>
+                    </div>
+                    <img id="scriptCam-img" src="img/transparent.gif" />
+                </div>
+                <div class="scriptCam-splitLayout align-left">
+                    <div class="clearfix">
+                        <button id="scriptCam-btn1" class="icon-code">Prendre une photo encodée</button>
+                    </div>
+                    <textarea id="scriptCam-formfield"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div id="getUserMedia" style="display: none;">
+            <h1>Capture d'image<span>via HTML5 getUserMedia</span></h1>
+
+            <div class="wrapper-center">
+                <div class="clearfix">
+                    <button id="getUserMedia-snap">Prendre une photo</button>
+                </div>
+                <div class="getUserMedia-splitLayout">
+                    <video id="getUserMedia-video" autoplay></video>
+                </div>
+                <div class="getUserMedia-splitLayout">
+                    <canvas id="getUserMedia-canvas"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div id="noCam" style="display: none;">
+            <h1>Envoyer une photo<span>À partir de votre disque dur</span></h1>
+
+            <div class="wrapper-center">
+                <div class="noCam-customInput">
+                    Choisir une photo
+                    <input id="noCam-input" type="file" />
+                </div>
+                <p>Vous avez sélectionné : <span id="noCam-fileName"></span></p>
+            </div>
+        </div>
+
+    </body>
+
+</html>

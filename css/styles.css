@@ -1,0 +1,556 @@
+/*
+    &:before, &:after {
+        @include clear();
+    }
+*/
+/* ************************* */
+/* VARIABLES
+/* ************************* */
+/*
+font-family: 'Oswald', 'sans-serif';
+font-family: 'Lato', 'sans-serif';
+*/
+/* ************************* */
+/* HTML, BODY, GLOBALS
+/* ************************* */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  -ms-touch-action: none;
+}
+
+body {
+  font-family: "Lato", Roboto, SegoeWP, HelveticaNeue, sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  background: #ebebf0;
+  color: #5b4c5c;
+  padding: 30px;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+h1 {
+  margin: 0 0 30px 0;
+  font-size: 40px;
+  font-weight: 100;
+  text-align: center;
+  line-height: 1.3;
+}
+h1 span {
+  display: block;
+  font-size: 26px;
+  font-weight: 300;
+  color: #aca89a;
+}
+
+/* ************************* */
+/* PAGE LOADING WIDGET
+/* ************************* */
+#loader {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1000;
+  width: 250px;
+  height: auto;
+  left: 50%;
+  top: 50%;
+  margin-left: -125px;
+  /* Must be width/2 */
+  margin-top: -80px;
+  /* Must be height/2 */
+  opacity: 0;
+  -webkit-transition: opacity 0.35s, visibility 0.35s;
+  transition: opacity 0.35s, visibility 0.35s;
+}
+#loader img {
+  position: absolute;
+  margin: 0 auto;
+  left: 37px;
+}
+#loader .icon {
+  position: relative;
+  display: block;
+  margin: 44px auto 10px;
+  width: 54px;
+  height: 55px;
+  background: url("../img/ajax-loader.gif");
+  background-size: 54px 55px;
+}
+#loader p {
+  position: relative;
+  margin-top: 10px;
+  font-size: 11px;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+}
+#loader.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+#loader-overlay {
+  z-index: 999;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+  opacity: 0.8;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: opacity 0.7s, visibility 0.7s;
+  transition: opacity 0.7s, visibility 0.7s;
+}
+#loader-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ************************* */
+/* MEDIACAPTURE
+/* ************************* */
+#mediaCapture .mediaCapture-customInput {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 14px 25px;
+  background: #ed8151;
+  border: none;
+  border-bottom: 3px solid #e86a32;
+  border-radius: 5px;
+  font-family: "Oswald", sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fff;
+  outline: none;
+  -webkit-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
+}
+#mediaCapture .mediaCapture-customInput::before {
+  content: '\f030 \00a0 \00a0';
+  display: inline-block;
+  font-family: 'FontAwesome';
+  font-weight: normal;
+  margin-right: 10px;
+  width: 20px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body.isDesktop #mediaCapture .mediaCapture-customInput:hover, #mediaCapture .mediaCapture-customInput:active {
+  background: #e86a32;
+}
+#mediaCapture .mediaCapture-customInput input {
+  z-index: 1;
+  position: absolute;
+  display: block;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#mediaCapture-img {
+  margin-bottom: 30px;
+}
+
+/* ************************* */
+/* SCRIPTCAM
+/* ************************* */
+#scriptCam .scriptCam-webcam-wrapper {
+  display: inline-block;
+  width: 330px;
+  max-width: 100%;
+}
+#scriptCam .scriptCam-webcam-wrapper p {
+  margin: 10px 0;
+}
+#scriptCam .scriptCam-customSelect {
+  width: 300px;
+  max-width: 100%;
+  padding: 0;
+  border: 3px solid #5b4c5c;
+  margin: 10px auto 25px;
+  overflow: hidden;
+  font-size: 18px;
+  background: transparent url("../img/triangle_dark.png") no-repeat 94% 50%;
+}
+#scriptCam .scriptCam-customSelect select {
+  cursor: pointer;
+  width: 100%;
+  padding: 10px 15px;
+  color: #5b4c5c;
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+  background-image: none;
+  text-indent: 0.01px;
+  text-overflow: '';
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+#scriptCam .scriptCam-customSelect select option {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#scriptCam button {
+  cursor: pointer;
+  display: block;
+  margin-bottom: 10px;
+  padding: 10px 16px;
+  background: #ed8151;
+  border: none;
+  border-bottom: 3px solid #e86a32;
+  border-radius: 5px;
+  font-family: "Oswald", sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fff;
+  outline: none;
+  -webkit-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
+}
+#scriptCam button::before {
+  content: '\f030 \00a0 \00a0';
+  display: inline-block;
+  font-family: 'FontAwesome';
+  font-weight: normal;
+  margin-right: 10px;
+  width: 20px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+#scriptCam button.icon-code::before {
+  content: '\f044 \00a0 \00a0';
+}
+body.isDesktop #scriptCam button:hover, #scriptCam button:active {
+  background: #e86a32;
+}
+#scriptCam .scriptCam-splitLayout {
+  display: inline-block;
+  width: 49%;
+  min-width: 320px;
+  vertical-align: top;
+  padding: 15px 10px;
+}
+#scriptCam .scriptCam-splitLayout.align-right {
+  text-align: right;
+}
+#scriptCam .scriptCam-splitLayout.align-right button {
+  float: right;
+}
+#scriptCam .scriptCam-splitLayout.align-left {
+  text-align: left;
+}
+#scriptCam textarea {
+  width: 320px;
+  height: 240px;
+  border: 1px solid #5b4c5c;
+}
+
+#scriptCam-img {
+  width: 320px;
+  max-width: 100%;
+  height: 240px;
+  border: 1px solid #5b4c5c;
+}
+
+/* ************************* */
+/* GETUSERMEDIA
+/* ************************* */
+#getUserMedia button {
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 10px 16px;
+  background: #ed8151;
+  border: none;
+  border-bottom: 3px solid #e86a32;
+  border-radius: 5px;
+  font-family: "Oswald", sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fff;
+  outline: none;
+  -webkit-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
+}
+#getUserMedia button::before {
+  content: '\f030 \00a0 \00a0';
+  display: inline-block;
+  font-family: 'FontAwesome';
+  font-weight: normal;
+  margin-right: 10px;
+  width: 20px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body.isDesktop #getUserMedia button:hover, #getUserMedia button:active {
+  background: #e86a32;
+}
+#getUserMedia .getUserMedia-splitLayout {
+  display: inline-block;
+  width: 49%;
+  vertical-align: top;
+  padding: 15px 10px;
+  text-align: center;
+}
+#getUserMedia .getUserMedia-splitLayout video,
+#getUserMedia .getUserMedia-splitLayout canvas {
+  width: 640px;
+  height: 480px;
+  max-width: 100%;
+  border: 1px solid #5b4c5c;
+}
+
+/* ************************* */
+/* NOCAM
+/* ************************* */
+#noCam .noCam-customInput {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 14px 25px;
+  background: #ed8151;
+  border: none;
+  border-bottom: 3px solid #e86a32;
+  border-radius: 5px;
+  font-family: "Oswald", sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fff;
+  outline: none;
+  -webkit-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
+}
+#noCam .noCam-customInput::before {
+  content: '\f03e \00a0 \00a0';
+  display: inline-block;
+  font-family: 'FontAwesome';
+  font-weight: normal;
+  margin-right: 10px;
+  width: 20px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body.isDesktop #noCam .noCam-customInput:hover, #noCam .noCam-customInput:active {
+  background: #e86a32;
+}
+#noCam .noCam-customInput input {
+  z-index: 1;
+  position: absolute;
+  display: block;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+#noCam p {
+  margin: 4px 0 20px 0;
+}
+#noCam p span {
+  color: #1f1f1f;
+  font-family: "Oswald", sans-serif;
+  font-weight: 400;
+}
+
+/* ************************* */
+/* TABLET ADAPTATIONS
+/* ************************* */
+/* ************************* */
+/* MEDIA QUERIES
+/* ************************* */
+@media screen and (max-width: 600px) {
+  #scriptCam .scriptCam-splitLayout {
+    width: 100%;
+    min-width: 0;
+    padding: 15px 0;
+  }
+  #scriptCam .scriptCam-splitLayout.align-right {
+    text-align: left;
+  }
+  #scriptCam .scriptCam-splitLayout.align-right button {
+    float: none;
+  }
+  #scriptCam textarea {
+    width: 100%;
+  }
+
+  #getUserMedia .getUserMedia-splitLayout {
+    width: 100%;
+    padding: 15px 0;
+  }
+}
+/* ************************* */
+/* HELPERS
+/* ************************* */
+/* Clearfix: countain floats
+Source : http://nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before, .clearfix:after {
+  content: "";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.clearfix {
+  *zoom: 1;
+}
+
+/* For IE 6/7 only - This rule triggers hasLayout and contain floats. */
+/* Reset margins and padding */
+.nomarginpadding {
+  margin: 0;
+  padding: 0;
+}
+
+/* Wrapper that centers content */
+.wrapper-center {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+/* Responsive block image */
+.img-block {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+  width: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.img-block.forced-width {
+  width: 100%;
+}
+
+/* Avoid clicks */
+.avoid-clicks {
+  pointer-events: none;
+}
+
+/* Android layer hack */
+.hack-android-layer {
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000;
+}
+
+/* Hide from both screenreaders and browsers: h5bp.com/u */
+.hidden {
+  display: none !important;
+  visibility: hidden;
+}
+
+/* Hide only visually, but have it available for screenreaders: h5bp.com/v */
+.visuallyhidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  clip: rect(0 0 0 0) !important;
+  overflow: hidden !important;
+}
+
+/* Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p */
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  clip: auto;
+  overflow: visible;
+}
+
+/* Hide visually and from screenreaders, but maintain layout */
+.invisible {
+  visibility: hidden;
+}
+
+/* ************************* */
+/* BEHAVIOR FIXES
+/* ************************* */
+/* See: http://stackoverflow.com/questions/10014461/why-does-enabling-hardware-acceleration-in-css3-slow-down-performance */
+body {
+  /* optimizeSpeed is the default. Using optimizeLegibility here will typically DOUBLE
+  rendering time! So, think twice about using optimizeLegibility */
+  /* Moreover, it causes a bug with 'text-overflow: ellipsis' on Android */
+  text-rendering: optimizeSpeed;
+  /* subpixel-antialiased is the default, but you might like to use antialiased for a thinner look
+  in Safari. There is no speed penalty for this, nor a speed advantage for "none", which looks
+  absolutely terrible... */
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+/* Disable confusing default behaviors */
+* {
+  /* Shut off long touch on links for info. If this is set to "default", then a long touch
+  on a link will display the URL in a popup. */
+  /* prevent callout when holding tap on links (the native dialog that comes up) */
+  -webkit-touch-callout: none !important;
+  /* prevent webkit from resizing text to fit */
+  -webkit-text-size-adjust: none;
+  /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* Prevent copy paste, to allow, change 'none' to 'text' (if active for inputs, users can't write within it) */
+/* Src: http://stackoverflow.com/questions/10809995/css-disable-text-selection */
+*:not(input):not(textarea) {
+  -webkit-user-select: none !important;
+  -khtml-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
+/* Turn off webkit checkbox style, works for other inputs too */
+input[type="checkbox"] {
+  -webkit-appearance: none;
+}
+
+/* ************************* */
+/* PRELOAD IMAGES
+/* ************************* */
+/* Src: http://www.ajaxera.com/image-preloading-through-css3-caching/ */
+/* WARNING: avoid loading every images in memory or it might result in 'received memory warning' */
+body:after {
+  content: url("../img/transparent.gif") url("../img/triangle_dark.png");
+  display: none;
+}

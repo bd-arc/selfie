@@ -1,0 +1,33 @@
+$responsive-small: 400px;
+$responsive-medium : 680px;
+
+$ratio_ld : 1;
+$ratio_hd : 1.3;
+
+$retina_medium : "only screen and (max-width: #{$responsive-medium}) and (-webkit-min-device-pixel-ratio: #{$ratio_ld})" +
+", only screen and (max-width: #{$responsive-medium}) and ( min--moz-device-pixel-ratio: #{$ratio_ld})" +
+", only screen and (max-width: #{$responsive-medium}) and ( -o-min-device-pixel-ratio: #{$ratio_ld}/1)" +
+", only screen and (max-width: #{$responsive-medium}) and ( min-device-pixel-ratio: #{$ratio_ld})" +
+", only screen and (max-width: #{$responsive-medium}) and ( min-resolution: #{round($ratio_ld*96)}dpi)" +
+", only screen and (max-width: #{$responsive-medium}) and (min-resolution: #{$ratio_ld}dppx)" +
+
+", only screen and (max-width: #{$responsive-medium / 2}) and (-webkit-min-device-pixel-ratio: #{$ratio_hd})" +
+", only screen and (max-width: #{$responsive-medium / 2}) and ( min--moz-device-pixel-ratio: #{$ratio_hd})" +
+", only screen and (max-width: #{$responsive-medium / 2}) and ( -o-min-device-pixel-ratio: #{$ratio_hd}/1)" +
+", only screen and (max-width: #{$responsive-medium / 2}) and ( min-device-pixel-ratio: #{$ratio_hd})" +
+", only screen and (max-width: #{$responsive-medium / 2}) and ( min-resolution: #{round($ratio_hd*96)}dpi)" +
+", only screen and (max-width: #{$responsive-medium / 2}) and (min-resolution: #{$ratio_hd}dppx)";
+
+$retina_small : "only screen and (max-width: #{$responsive-small}) and (-webkit-min-device-pixel-ratio: #{$ratio_ld})" +
+", only screen and (max-width: #{$responsive-small}) and ( min--moz-device-pixel-ratio: #{$ratio_ld})" +
+", only screen and (max-width: #{$responsive-small}) and ( -o-min-device-pixel-ratio: #{$ratio_ld}/1)" +
+", only screen and (max-width: #{$responsive-small}) and ( min-device-pixel-ratio: #{$ratio_ld})" +
+", only screen and (max-width: #{$responsive-small}) and ( min-resolution: #{round($ratio_ld*96)}dpi)" +
+", only screen and (max-width: #{$responsive-small}) and (min-resolution: #{$ratio_ld}dppx)" +
+
+", only screen and (max-width: #{$responsive-small / 2}) and (-webkit-min-device-pixel-ratio: #{$ratio_hd})" +
+", only screen and (max-width: #{$responsive-small / 2}) and ( min--moz-device-pixel-ratio: #{$ratio_hd})" +
+", only screen and (max-width: #{$responsive-small / 2}) and ( -o-min-device-pixel-ratio: #{$ratio_hd}/1)" +
+", only screen and (max-width: #{$responsive-small / 2}) and ( min-device-pixel-ratio: #{$ratio_hd})" +
+", only screen and (max-width: #{$responsive-small / 2}) and ( min-resolution: #{round($ratio_hd*96)}dpi)" +
+", only screen and (max-width: #{$responsive-small / 2}) and (min-resolution: #{$ratio_hd}dppx)";

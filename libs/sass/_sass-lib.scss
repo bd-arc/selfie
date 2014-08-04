@@ -1,0 +1,298 @@
+$ie6: true;
+$ie7: true;
+$pie: true;
+
+// *************************************
+// FUNCTION
+// *************************************
+
+// ----- convert px => em
+
+$_1em: 16; // px
+
+@function px($px) {
+    @return ($px / $_1em) + em;
+}
+
+// ----- responsive
+
+@function context($px, $context) {
+    $percent: percentage($px / $context);
+    @return $percent;
+}
+
+// *************************************
+// CSS2
+// *************************************
+
+// ----- element-invisible
+
+@mixin element-invisible () {
+    position: absolute !important;
+    clip: rect(1px 1px 1px 1px); // ie6, ie7
+    clip: rect(1px, 1px, 1px, 1px);
+}
+
+// ----- height
+
+@mixin height ($h) {
+    height: auto;
+    _height: $h;
+    min-height: $h;
+}
+
+// ----- line-height
+
+@mixin line-height ($h) {
+    height: $h;
+    line-height: $h;
+}
+
+// ----- width min max px
+
+@mixin width-min-max-px ($default: auto, $min: 640 /* px */, $max: 1400 /* px */) {
+    width: $default;
+    min-width: #{$min}px;
+    max-width: #{$max}px;
+    ///* ie6 */
+    //_width: ~'expression(document.body.clientWidth < #{$min}? "#{$min}px" : document.body.clientWidth > #{$max}? "#{$max}px" : "#{$default}")'; /* http://www.cameronmoll.com/archives/000892.html */
+}
+
+// ----- float
+
+@mixin ie6-display-inline {
+    @if $ie6 { _display: inline; }
+}
+
+@mixin float-left {
+    @include ie6-display-inline;
+    clear: none;
+    float: left;
+}
+
+@mixin float-left-clear {
+    @include ie6-display-inline;
+    clear: both;
+    float: left;
+}
+
+@mixin float-right {
+    @include ie6-display-inline;
+    clear: none;
+    float: right;
+}
+
+@mixin float-right-clear {
+    @include ie6-display-inline;
+    clear: both;
+    float: right;
+}
+
+// ----- ellipsis
+
+@mixin ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+
+    -moz-binding: url ('ellipsis.xml#ellipsis'); // firefox
+}
+
+@mixin no-ellipsis {
+    text-overflow: initial;
+    -o-text-overflow: initial;
+    -ms-text-overflow: initial;
+}
+
+// *************************************
+// CSS3
+// *************************************
+
+// ----- opacity
+
+@mixin opacity ($val: 50) {
+    filter: Alpha(Opacity=$val);
+    opacity: $val / 100;
+}
+
+// ----- box-sizing
+
+@mixin box-sizing ($val: border-box) {
+    -webkit-box-sizing: $val;
+    -moz-box-sizing: $val;
+    -ms-box-sizing: $val;
+    box-sizing: $val;
+}
+
+// ----- box-shadow
+
+@mixin box-shadow ($x: 0, $y: 3px, $blur: 10px, $color: rgba(0, 0, 0, .6), $direction: 180, $strength: 5) {
+    -webkit-box-shadow: $x $y $blur $color;
+    -moz-box-shadow: $x $y $blur $color;
+    -ms-box-shadow: $x $y $blur $color;
+    -o-box-shadow: $x $y $blur $color;
+    box-shadow: $x $y $blur $color;
+
+    // Microsoft
+    //-ms-filter: ~"progid:DXImageTransform.Microsoft.Shadow(color=#{$color}, direction=#{$direction}, strength=#{$strength})";
+    //filter: ~"progid:DXImageTransform.Microsoft.Shadow(color=#{$color}, direction=#{$direction}, strength=#{$strength})";
+}
+
+@mixin no-box-shadow () {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    -o-box-shadow: none;
+    box-shadow: none;
+}
+
+
+// ----- border-radius
+
+@mixin border-radius ($radius: 3px) {
+    -webkit-border-radius: $radius;
+    -khtml-border-radius: $radius;
+    -moz-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin no-border-radius () {
+    @include border-radius(0);
+}
+
+@mixin border-radius-top ($radius: 3px) {
+    @include border-radius ($radius $radius 0 0);
+}
+
+@mixin border-radius-right ($radius: 3px) {
+    @include border-radius (0 $radius $radius 0);
+}
+
+@mixin border-radius-bottom ($radius: 3px) {
+    @include border-radius (0 0 $radius $radius);
+}
+
+@mixin border-radius-left ($radius: 3px) {
+    @include border-radius ($radius 0 0 $radius);
+}
+
+// ----- border-radius
+
+@mixin background-size ($args...) {
+    -webkit-background-size: $args;
+    -khtml-background-size: $args;
+    -moz-background-size: $args;
+    -o-background-size: $args;
+    background-size: $args;
+}
+
+// ----- transition
+
+@mixin __transition ($args...) {
+    -webkit-transition: $args;
+    -moz-transition: $args;
+    -ms-transition: $args;
+    -o-transition: $args;
+    transition: $args;
+}
+
+@mixin transition ($type: all, $delay: 0.3s, $easing: ease-out) {
+    @include __transition ($type $delay $easing);
+}
+
+// ----- text-shadow
+
+@mixin text-shadow ($x: 1px, $y: 1px, $blur: 2px, $color: rgba(0, 0, 0, .6) ) {
+    text-shadow: $x $y $blur $color;
+}
+@mixin no-text-shadow () {
+    @include text-shadow(0, 0, 0);
+}
+
+// ----- linear-gradient
+
+@mixin linear-gradient ($from: #9F9, $to: #393, $ie-color: null) {
+    $color-mix: mix($from, $to);
+    @if $ie-color != null { $color-mix: $ie-color; }
+
+    background: $color-mix;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from($from), to($to) );
+    background: -webkit-linear-gradient($from, $to);
+    background: -moz-linear-gradient($from, $to);
+    background: -ms-linear-gradient($from, $to);
+    background: -o-linear-gradient($from, $to);
+
+    // CSS PIE
+    @if $pie { -pie-background: linear-gradient($from, $to); }
+}
+
+// ----- text-size-adjust
+
+@mixin text-size-adjust ($value: 100%) {
+    -webkit-text-size-adjust: $value;
+    -moz-text-size-adjust: $value;
+    -ms-text-size-adjust: $value;
+}
+
+// ----- clear
+@mixin clear() {
+    content: "\00a0";
+    display: block;
+    clear: both;
+    font-size: 0;
+    height: 0;
+}
+/*
+    &:before, &:after {
+        @include clear();
+    }
+*/
+
+// ----- extends
+
+:hover, :focus, :active {
+    @extend ._hover;
+}
+
+// ----- high density
+
+// http://css-tricks.com/snippets/css/retina-display-media-query/
+// $mdpi : 100%
+// $hdpi : 150%
+// $retina : 200%
+// xhdpi : 225%
+
+//$retina : "only screen and (-webkit-min-device-pixel-ratio: 2), only screen and ( min--moz-device-pixel-ratio: 2), only screen and ( -o-min-device-pixel-ratio: 2/1), only screen and ( min-device-pixel-ratio: 2), only screen and ( min-resolution: 192dpi), only screen and (min-resolution: 2dppx)";
+//$retina : "only screen and (-webkit-min-device-pixel-ratio: 1.25), only screen and ( min--moz-device-pixel-ratio: 1.25), only screen and ( -o-min-device-pixel-ratio: 1.25/1), only screen and ( min-device-pixel-ratio: 1.25), only screen and ( min-resolution: 120dpi), only screen and (min-resolution: 1.25dppx)";
+
+$ratio : 1.3;
+$retina : "only screen and (-webkit-min-device-pixel-ratio: #{$ratio})" +
+", only screen and ( min--moz-device-pixel-ratio: #{$ratio})" +
+", only screen and ( -o-min-device-pixel-ratio: #{$ratio}/1)" +
+", only screen and ( min-device-pixel-ratio: #{$ratio})" +
+", only screen and ( min-resolution: #{round($ratio*96)}dpi)" +
+", only screen and (min-resolution: #{$ratio}dppx)";
+
+// example
+@media #{$retina} {
+}
+
+@mixin background-image-retina($ld, $hd, $bg-size) {
+    background-image: url($ld);
+
+    .image-hd & {
+        background-image: url($hd);
+        @include background-size($bg-size);
+    }
+
+    @media #{$retina} {
+        background-image: url($hd);
+        @include background-size($bg-size);
+    }
+}
+
+
+
