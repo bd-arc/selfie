@@ -39,6 +39,8 @@ ScriptCam (paid plugin)
 
 https://www.scriptcam.com/demo_1.cfm
 
+https://www.scriptcam.com/docs.cfm
+
 https://www.scriptcam.com/download.cfm
 
 
